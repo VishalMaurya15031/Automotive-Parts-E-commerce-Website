@@ -27,9 +27,21 @@ export interface User {
 
 export interface Order {
   id: string
+  razorpayOrderId: string
+  razorpayPaymentId: string
   userId: string
   items: CartItem[]
   totalPrice: number
-  status: "pending" | "processing" | "shipped" | "delivered"
+  totalPriceINR: number
+  status: "pending" | "confirmed" | "processing" | "shipped" | "delivered"
   orderDate: string
+  shippingInfo: {
+    name: string
+    email: string
+    phone: string
+    address: string
+    city: string
+    state: string
+    pincode: string
+  }
 }

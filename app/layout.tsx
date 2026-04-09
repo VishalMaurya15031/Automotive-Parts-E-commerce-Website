@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/lib/cart-context'
 import { AuthProvider } from '@/lib/auth-context'
+import { OrderProvider } from '@/lib/order-context'
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <AuthProvider>
           <CartProvider>
-            {children}
+            <OrderProvider>
+              {children}
+            </OrderProvider>
           </CartProvider>
         </AuthProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}

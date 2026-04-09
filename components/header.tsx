@@ -103,14 +103,17 @@ export function Header() {
                     {user?.name}
                   </div>
                   <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuItem asChild className="text-gray-300 focus:text-white focus:bg-white/10">
+                    <Link href="/orders">My Orders</Link>
+                  </DropdownMenuItem>
                   {isAdmin && (
                     <>
                       <DropdownMenuItem asChild className="text-gray-300 focus:text-white focus:bg-white/10">
                         <Link href="/admin">Admin Dashboard</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator className="bg-white/10" />
                     </>
                   )}
+                  <DropdownMenuSeparator className="bg-white/10" />
                   <DropdownMenuItem onClick={logout} className="text-gray-300 focus:text-white focus:bg-white/10">
                     Logout
                   </DropdownMenuItem>
