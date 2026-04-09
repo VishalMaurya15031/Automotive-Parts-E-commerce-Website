@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ChevronRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ChevronRight, CreditCard } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -12,10 +12,9 @@ import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
 
 export default function CartPage() {
+  const router = useRouter()
   const { items, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart()
   const { isAuthenticated } = useAuth()
-  const [isCheckingOut, setIsCheckingOut] = useState(false)
-  const [orderPlaced, setOrderPlaced] = useState(false)
 
   const shipping = totalPrice > 50 ? 0 : 9.99
   const tax = totalPrice * 0.08
@@ -23,45 +22,10 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (!isAuthenticated) {
-      window.location.href = "/login?redirect=/cart"
+      router.push("/login?redirect=/checkout")
       return
     }
-    
-    setIsCheckingOut(true)
-    // Simulate checkout process
-    setTimeout(() => {
-      setOrderPlaced(true)
-      clearCart()
-      setIsCheckingOut(false)
-    }, 1500)
-  }
-
-  if (orderPlaced) {
-    return (
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">
-          <div className="mx-auto max-w-2xl px-4 py-16 text-center">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-accent/20">
-              <ShoppingBag className="h-10 w-10 text-accent" />
-            </div>
-            <h1 className="mt-6 text-3xl font-bold text-foreground">
-              Order Placed Successfully!
-            </h1>
-            <p className="mt-2 text-muted-foreground">
-              Thank you for your purchase. You will receive a confirmation email shortly.
-            </p>
-            <Link href="/products">
-              <Button className="mt-8">
-                Continue Shopping
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    )
+    router.push("/checkout")
   }
 
   return (
@@ -241,15 +205,15 @@ export default function CartPage() {
                     className="mt-6 w-full"
                     size="lg"
                     onClick={handleCheckout}
-                    disabled={isCheckingOut}
                   >
-                    {isCheckingOut ? "Processing..." : "Proceed to Checkout"}
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Proceed to Checkout
                   </Button>
 
                   {!isAuthenticated && (
                     <p className="mt-3 text-center text-sm text-muted-foreground">
                       You&apos;ll need to{" "}
-                      <Link href="/login?redirect=/cart" className="text-primary hover:underline">
+                      <Link href="/login?redirect=/checkout" className="text-primary hover:underline">
                         log in
                       </Link>{" "}
                       to complete your order
