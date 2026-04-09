@@ -7,6 +7,7 @@ interface AuthContextType {
   user: User | null
   login: (email: string, password: string) => Promise<boolean>
   signup: (name: string, email: string, password: string) => Promise<boolean>
+  loginWithGoogle: () => Promise<boolean>
   logout: () => void
   isAuthenticated: boolean
   isAdmin: boolean
@@ -57,6 +58,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true
   }, [])
 
+  const loginWithGoogle = useCallback(async (): Promise<boolean> => {
+    // Simulate Google OAuth popup and API call delay
+    await new Promise(resolve => setTimeout(resolve, 800))
+    
+    // In a real app, this would redirect to Google OAuth
+    // For demo purposes, we create a mock Google user
+    const googleUser: User = {
+      id: "google-" + Date.now(),
+      name: "Google User",
+      email: "googleuser@gmail.com",
+      role: "user",
+      avatar: "https://lh3.googleusercontent.com/a/default-user"
+    }
+    
+    setUser(googleUser)
+    return true
+  }, [])
+
   const logout = useCallback(() => {
     setUser(null)
   }, [])
@@ -67,6 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user,
         login,
         signup,
+        loginWithGoogle,
         logout,
         isAuthenticated: !!user,
         isAdmin: user?.role === "admin"

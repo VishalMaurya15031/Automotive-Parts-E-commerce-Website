@@ -22,6 +22,7 @@ export interface User {
   name: string
   email: string
   role: "user" | "admin"
+  avatar?: string
 }
 
 export interface Order {
