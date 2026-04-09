@@ -4,26 +4,26 @@ import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-muted/50 to-background">
+    <section className="relative overflow-hidden bg-[#f5f5f5]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24">
         <div className="text-center">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Quality Auto Parts for{" "}
-            <span className="text-primary">Cars & Bikes</span>
+          <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <span className="font-serif text-foreground">Quality Auto Parts for </span>
+            <span className="font-serif italic text-[#b91c1c]">Cars & Bikes</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">
             Find the perfect parts for your vehicle. We offer a wide selection of high-quality automotive parts at competitive prices with fast shipping.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/products?category=car">
-              <Button size="lg" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto bg-[#b91c1c] hover:bg-[#991b1b] text-white px-8">
                 <Car className="mr-2 h-5 w-5" />
                 Shop Car Parts
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/products?category=bike">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto border-gray-300 bg-white hover:bg-gray-50 text-foreground px-8">
                 <Bike className="mr-2 h-5 w-5" />
                 Shop Bike Parts
               </Button>
