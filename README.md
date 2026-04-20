@@ -16,7 +16,7 @@ This project is developed as part of the **UCT Full Stack Internship Program** t
 
 Add deployed project link here:
 
-https://v0-automotive-parts-website-snowy.vercel.app/
+https://automotive-parts-website-snowy.vercel.app/
 
 ---
 
